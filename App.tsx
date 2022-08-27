@@ -12,6 +12,7 @@ import React from 'react';
 import {
   Image,
   SafeAreaView,
+  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -20,24 +21,22 @@ import {
 } from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Route from './src/route/Index';
 
-import HomeScreen from './src/Screens/HomeScreen';
-import ProductScreen from './src/Screens/ProductScreen';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.dark : Colors.lighter,
+    flex: 1,
   };
-
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <View style={backgroundStyle}>
       <StatusBar barStyle={'dark-content'} backgroundColor={'white'} />
 
-      {/*  <HomeScreen /> */}
-      <ProductScreen />
-    </SafeAreaView>
+      <Route />
+    </View>
   );
 };
 
