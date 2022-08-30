@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   View,
@@ -23,53 +24,18 @@ const ShoppingCart = () => {
     return sum + item.item.price;
   }, 0);
 
+  const navigation = useNavigation();
+
+  const onCheckout = () => {
+    navigation.navigate('AdressScreen');
+  };
+
   return (
     <View /* contentContainerStyle={styles.root} */>
       {/* sherchbar */}
       {/* subtotla and button*/}
       <StatusBar backgroundColor="#48a3c6" />
-      <SafeAreaView
-        style={{
-          backgroundColor: '#48a3c6',
-          height: 60,
-          borderRadius: 5,
-          justifyContent: 'center',
-        }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            backgroundColor: 'white',
-            marginHorizontal: 10,
-            marginVertical: 7,
-            borderRadius: 5,
-            padding: 5,
-          }}>
-          <Feather name="search" size={25} color="black" />
-          <TextInput
-            placeholder=" search..."
-            placeholderTextColor={'black'}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              alignSelf: 'stretch',
-              flex: 1,
-            }}
-          />
-          <Feather
-            name="camera"
-            size={25}
-            color="black"
-            style={{marginHorizontal: 5}}
-          />
-          <Feather
-            name="mic"
-            size={25}
-            color="black"
-            style={{marginHorizontal: 5}}
-          />
-        </View>
-      </SafeAreaView>
+     
 
       {/* using reduce to accumulate value  */}
       <View style={styles.subtotalContainer}>
@@ -77,7 +43,7 @@ const ShoppingCart = () => {
           Subtotal({products.length} items):{' '}
           <Text style={{color: '#e47911'}}>${totalPrice.toFixed(2)}</Text>
         </Text>
-        <Button title="Proceed to checkout" />
+        <Button title="Proceed to checkout" onPress={onCheckout} />
       </View>
 
       {/* flatlist that render shoppingcart Prodcuts */}

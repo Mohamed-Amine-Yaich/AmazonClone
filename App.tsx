@@ -33,7 +33,7 @@ const App = () => {
   };
   return (
     <View style={backgroundStyle}>
-      <StatusBar barStyle={'dark-content'} backgroundColor={'white'} />
+      <StatusBar barStyle={'dark-content'} backgroundColor={'#48a3c6'} />
 
       <Route />
     </View>

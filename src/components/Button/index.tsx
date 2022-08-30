@@ -3,12 +3,12 @@ import React from 'react';
 import styles from './styles';
 interface ButtonProps {
   title: string;
+  onPress: () => Void;
 }
 
-const Button = ({title}: ButtonProps) => {
-  const handelButtonPress = () => {};
+const Button = ({title, onPress}: ButtonProps) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={handelButtonPress}>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );

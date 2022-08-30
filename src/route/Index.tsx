@@ -11,8 +11,11 @@ const Stack = createStackNavigator();
 const Route = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="app" component={TabNavigation} />
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="tabNavigation" component={TabNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

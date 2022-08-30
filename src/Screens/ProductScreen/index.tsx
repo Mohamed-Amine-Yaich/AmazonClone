@@ -16,12 +16,16 @@ import styles from './styles';
 import product from '../../data/product';
 import QuantitySelector from '../../components/QantitySelector';
 import Button from '../../components/Button';
+import {useRoute} from '@react-navigation/native';
 
 const ProductScreen = () => {
   const {width} = useWindowDimensions();
   const [imgIndex, setImgIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(product.options[0]);
   const [quantity, setQuantity] = useState(0);
+
+  const route = useRoute();
+  console.log('product id:', route.params.id);
 
   /* onviewableItem change take a function
   when the page render every time a new function is created and assayned to this flatlist prop

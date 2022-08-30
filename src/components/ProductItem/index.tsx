@@ -1,9 +1,10 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import React from 'react';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import styles from './styles';
+import {useNavigation} from '@react-navigation/native';
 
 //interface is how object look like
 interface ProductItemProps {
@@ -21,8 +22,14 @@ interface ProductItemProps {
 const ProductItem = ({item}: ProductItemProps) => {
   const {title, image, avgRating, ratings, price, oldPrice} = item;
 
+  const navigation = useNavigation();
+
+  const handelItemPress = () => {
+    navigation.navigate('ProductScreen', {id: item.id});
+  };
+
   return (
-    <View style={styles.root}>
+    <Pressable onPress={handelItemPress} style={styles.root}>
       <Image
         source={{
           uri: image,
@@ -57,7 +64,7 @@ const ProductItem = ({item}: ProductItemProps) => {
           from: {price} <Text style={styles.oldPrice}>${oldPrice}</Text>
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

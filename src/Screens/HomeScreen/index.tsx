@@ -4,7 +4,12 @@ import ProductItem from '../../components/ProductItem';
 
 import products from '../../data/products';
 
-const HomeScreen = () => {
+interface HomeScreenProps {
+  searchValue: string;
+}
+
+const HomeScreen = ({searchValue}: HomeScreenProps) => {
+  console.log('home screen props searchValue :', searchValue);
   return (
     <View style={styles.page}>
       <FlatList
