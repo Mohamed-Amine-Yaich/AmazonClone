@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "amzoneamineapi",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 365,
+      "apiKeyExpirationDate": "2023-09-16T13:41:02.582Z",
+      "keyDescription": "api by med amine for amzon clone"
+    }
+  }
+}

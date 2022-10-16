@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 16,
     padding: 10,
+    marginBottom: 100
   },
   subtotalContainer: {
     marginVertical: 10,

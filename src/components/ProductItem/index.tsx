@@ -61,7 +61,8 @@ const ProductItem = ({item}: ProductItemProps) => {
         </View>
 
         <Text style={styles.productPrice}>
-          from: {price} <Text style={styles.oldPrice}>${oldPrice}</Text>
+          from: {price.toFixed(2)}{' '}
+          <Text style={styles.oldPrice}>${oldPrice?.toFixed(2)}</Text>
         </Text>
       </View>
     </Pressable>

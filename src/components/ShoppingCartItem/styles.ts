@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     overflow: 'hidden',
     borderRadius: 10,
+    
   },
   row: {flexDirection: 'row'},
   Image: {

@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amazonbyamine-dev-152710-authRole",
+      "UnauthRoleArn": "arn:aws:iam::040673270257:role/amplify-amazonbyamine-dev-152710-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::040673270257:role/amplify-amazonbyamine-dev-152710-authRole",
+      "Region": "eu-west-3",
+      "DeploymentBucketName": "amplify-amazonbyamine-dev-152710-deployment",
+      "UnauthRoleName": "amplify-amazonbyamine-dev-152710-unauthRole",
+      "StackName": "amplify-amazonbyamine-dev-152710",
+      "StackId": "arn:aws:cloudformation:eu-west-3:040673270257:stack/amplify-amazonbyamine-dev-152710/7d99edc0-3502-11ed-870f-0e9daaf6a322",
+      "AmplifyAppId": "d3ahcgqj00o0h2"
+    },
+    "categories": {
+      "auth": {
+        "amazonbyamine329506e6": {}
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -6,26 +6,33 @@ import {
   Image,
   useWindowDimensions,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import React from 'react';
 
 import {Picker} from '@react-native-picker/picker';
 
 import styles from './styles';
-
-import product from '../../data/product';
+/* replace this Product for the data with a Product from dataStore */
+//import product from '../../data/product';
 import QuantitySelector from '../../components/QantitySelector';
 import Button from '../../components/Button';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
+
+import {Auth, DataStore} from 'aws-amplify';
+
+import {Product, CartPoduct} from '../../models';
 
 const ProductScreen = () => {
   const {width} = useWindowDimensions();
   const [imgIndex, setImgIndex] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(product.options[0]);
-  const [quantity, setQuantity] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(product?.options[0]);
+  const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState<Product>(null);
 
   const route = useRoute();
-  console.log('product id:', route.params.id);
+  const navigation = useNavigation();
+  //  console.log('product id:', route.params.id);
 
   /* onviewableItem change take a function
   when the page render every time a new function is created and assayned to this flatlist prop
@@ -33,6 +40,7 @@ that what makes the error :changiing onviewable itemchanged on the fly is not su
   for not having this issue we use use callback hooks for not creating new function but memorizing the function
 
    */
+
   const onViewableItemsChanged = useCallback(
     ({viewableItems /* , changed */}) => {
       /*   console.log('Visible items are', viewableItems);
@@ -44,6 +52,38 @@ that what makes the error :changiing onviewable itemchanged on the fly is not su
     [],
   );
   const viewConfigRef = React.useRef({viewAreaCoveragePercentThreshold: 50});
+
+  useEffect(() => {
+    if (!route.params.id) {
+      return;
+    }
+    DataStore.query(Product, route.params?.id).then(result => {
+      setProduct(result);
+      console.log('result by id :', result);
+    });
+  }, [route.params.id]);
+
+  const addTochart = async () => {
+    //creation of a cartProduct
+    const authUser = await Auth.currentAuthenticatedUser();
+
+    if (!product || !authUser) {
+      return;
+    }
+
+    const newcartProd = new CartPoduct({
+      userSub: authUser.attributes.sub,
+      quantity,
+      option: selectedOption,
+      ProductID: product.id,
+    });
+    await DataStore.save(newcartProd);
+    navigation.navigate('ShoppingStack');
+  };
+
+  if (!product) {
+    return <ActivityIndicator />;
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.root}>
@@ -103,21 +143,23 @@ that what makes the error :changiing onviewable itemchanged on the fly is not su
       </View>
 
       {/*option selector  */}
-
-      <Picker
-        style={styles.picker}
-        selectedValue={selectedOption}
-        onValueChange={(itemValue, itemIndex) => setSelectedOption(itemValue)}>
-        {product.options.map(item => (
-          <Picker.Item key={item} label={item} value={item} />
-        ))}
-      </Picker>
-
+      {product.options && (
+        <Picker
+          style={styles.picker}
+          selectedValue={selectedOption}
+          onValueChange={(itemValue, itemIndex) =>
+            setSelectedOption(itemValue)
+          }>
+          {product.options.map(item => (
+            <Picker.Item key={item} label={item} value={item} />
+          ))}
+        </Picker>
+      )}
       {/* price */}
       <View style={styles.priceContainer}>
         <Text style={[styles.dolarSign]}>$</Text>
-        <Text style={styles.price}>{product.price}</Text>
-        <Text style={styles.oldprice}> {product.oldPrice}</Text>
+        <Text style={styles.price}>{product.price.toFixed(2)}</Text>
+        <Text style={styles.oldprice}> {product.oldPrice?.toFixed(2)}</Text>
       </View>
 
       {/* description */}
@@ -127,7 +169,7 @@ that what makes the error :changiing onviewable itemchanged on the fly is not su
       {/* quantity selector two buton component */}
       <QuantitySelector quantity={quantity} updateQuantity={setQuantity} />
       {/* button component */}
-      <Button title={'Add to cart'} />
+      <Button title={'Add to cart'} onPress={addTochart} />
       <Button title={'buy now'} />
     </ScrollView>
   );

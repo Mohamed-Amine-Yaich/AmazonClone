@@ -1,0 +1,80 @@
+part3
+the application will go offline first :
+-app cache data in the device storage 
+-you will be able to make an order when you are offline and when you back online everything is sync with the remote db
+
+*)set up the amlify cli
+
+1)install and configure the amplify cli
+
+The Amplify Command Line Interface (CLI) is a
+ unified toolchain to create AWS cloud services for your app. Let's go ahead and install the Amplify CLI
+ (
+npm install -g @aws-amplify/cli
+amplify configure
+ )
+- you will specify the aws region 
+- and the username of the new IAM user(you will get a Acess key id and a secret key)
+
+2)set up fullstack project
+-select the front that you use (RN (expo,RN cli)) in the docs 
+-amplify init (use the IAM profile user that you have created,name for backend )
+-insall Amplify libraries ()
+-adding the importion in the App.tsx or index.js(find in documentation)
+then you can start adding the services that you want the amplify cli :)
+1)add auth
+-amplify add auth
+-amplify push
+(Now, the authentication service has been deployed and you can start using it. To view the deployed services in your project at any time, go to Amplify Console by running the following command)
+-amplify console
+-add the with Authenticator (heigh order component from aws-amplify-react-native)
+
+2)offline-first graphQL api with datastore
+datastore help cache data in the device when you are offline work as a stand along library 
+then datastore will make sure that your data is uptodate sync data with data base
+
+2)add api
+amplify add api 
+-graphQL
+-apiname
+-description for the api
+-expiration date for the api 
+-configure advanced setting for the graphQLapi :yes
+ (enable confilict detection :yes)(for syncronizing your app when it is offline)
+  -default resolution startegy :auto merge
+-annotate graphQL shema : No
+-choose a schema template : one to many
+-open schema
+2)set up your schema.graphQL
+*)specify the method of authentication used on every type if not (the default method is used)
+@auth(rules :  [{ allow : public}])
+
+*)after setting schema
+-amplify push
+-choose genareat code for your newly api yes
+-language target typeScript
+-file name of the graphQL query and mutation (default) 
+-file name of generated code (default)
+
+amplify console(open the console) press go  admin ui management , or sduio
+-when studio is enable send invitaion to a user(with email) and give him access (**)
+-navigate to the admin ui or amplify studio with the url specified in backend environement
+*)in the studio we can set the schema of the graphQL that we define in 2end section
+-go to data set deploy (for deploying data model)
+-you can set data model as you want in the UI (mange type,data, add model ...)
+-use auto genrate data (fill product with image)
+
+
+
+***)set up aws s3  storage for  media (store media )
+****)the important part in the backend part is the aws amplify AdminUI (mangae content)
+notif)with micro services you can create lamda function for a specific part of your app that handel specific buisniss logic
+(create micro service architecture with lamda function , and connect them with the api when call the api it will call lamda function and do all the job ) 
+after configure the api we run codegen models (make models for ower datastore)
+
+
+
+
+*)adding CartProduct 
+in product screen we create a function that manage creation of new instance of the CartProduct module 
+and use Data store for creation (and specify the new instance fields from the state of(option,quantity,userSub,productId))

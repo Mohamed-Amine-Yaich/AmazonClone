@@ -5,15 +5,16 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import styles from './styles';
 import QuantitySelector from '../QantitySelector';
+import {CartPoduct} from '../../models';
+import {DataStore} from 'aws-amplify';
 
 //interface is how object look like
 interface ProductItemProps {
   item: {
-    id: string;
+    option: String;
+    id: String;
     quantity: number;
-
-    item: {
-      id: string;
+    product: {
       title: string;
       image: string;
       avgRating: number;
@@ -25,9 +26,17 @@ interface ProductItemProps {
 }
 
 const ShoppingCartItem = ({item}: ProductItemProps) => {
-  const {title, image, avgRating, ratings, price, oldPrice} = item.item;
+  const {title, image, avgRating, ratings, price, oldPrice} = item.product;
+  const {quantity, id} = item;
 
-  const [quantity, setQuantity] = useState(1);
+  const updatequantity = async newquantity => {
+    const original = await DataStore.query(CartPoduct, id);
+    await DataStore.save(
+      CartPoduct.copyOf(original, updated => {
+        updated.quantity = newquantity;
+      }),
+    );
+  };
 
   return (
     <View style={styles.root}>
@@ -67,7 +76,7 @@ const ShoppingCartItem = ({item}: ProductItemProps) => {
           </Text>
         </View>
       </View>
-      <QuantitySelector quantity={quantity} updateQuantity={setQuantity} />
+      <QuantitySelector quantity={quantity} updateQuantity={updatequantity} />
     </View>
   );
 };

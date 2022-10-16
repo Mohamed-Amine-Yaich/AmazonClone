@@ -22,7 +22,11 @@ import {
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Route from './src/route/Index';
+import {Amplify} from 'aws-amplify';
 
+import {withAuthenticator} from 'aws-amplify-react-native';
+import awsconfig from './src/aws-exports';
+Amplify.configure(awsconfig);
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
@@ -33,11 +37,11 @@ const App = () => {
   };
   return (
     <View style={backgroundStyle}>
-      <StatusBar barStyle={'dark-content'} backgroundColor={'#48a3c6'} />
+      <StatusBar barStyle={'light-content'} backgroundColor={'#48a3c6'} />
 
       <Route />
     </View>
   );
 };
 
-export default App;
+export default withAuthenticator(App);

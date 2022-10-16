@@ -45,7 +45,7 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Cartstack"
+        name="ShoppingStack"
         component={ShoppingStack}
         options={{
           tabBarIcon: ({_, focused}) => (
