@@ -77,7 +77,8 @@ that what makes the error :changiing onviewable itemchanged on the fly is not su
       option: selectedOption,
       ProductID: product.id,
     });
-    await DataStore.save(newcartProd);
+    const CreatingcartProdRes = await DataStore.save(newcartProd);
+    console.log('creating cartProd response ', CreatingcartProdRes);
     navigation.navigate('ShoppingStack');
   };
 

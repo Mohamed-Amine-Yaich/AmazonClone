@@ -1,5 +1,6 @@
 {
   "AppSyncApiName": "amzoneamineapi",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2022-10-20T10:24:56.447Z"
 }

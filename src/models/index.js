@@ -4,9 +4,11 @@ import { schema } from './schema';
 
 
 
-const { Product, CartPoduct } = initSchema(schema);
+const { Product, CartPoduct, OrderProduct, Order } = initSchema(schema);
 
 export {
   Product,
-  CartPoduct
+  CartPoduct,
+  OrderProduct,
+  Order
 };

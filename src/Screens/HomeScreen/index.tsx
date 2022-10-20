@@ -16,7 +16,10 @@ const HomeScreen = ({searchValue}: HomeScreenProps) => {
   /* create a peace of state to save fetched data on it products */
   const [products, setProducts] = useState<Product[]>([]);
   useEffect(() => {
-    DataStore.query(Product).then(result => setProducts(result));
+    DataStore.query(Product).then(result => {
+      console.log('Product from DataStore : ', result);
+      setProducts(result);
+    });
     //remove the console.log(and setdata in the state for display in the screen)
   }, []);
 

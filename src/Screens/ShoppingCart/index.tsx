@@ -26,11 +26,20 @@ const ShoppingCart = () => {
 
   const fetchUserCartProducts = async () => {
     const authUser = await Auth.currentAuthenticatedUser();
-
+    console.log(authUser.attributes.sub);
+    /* console.log(authUser); */
     // Simple query
-    const cardprod = await API.graphql({query: queries.listCartPoducts});
+    //not working query is not working  try with data store
 
-    setCartProduct(cardprod.data.listCartPoducts.items);
+    /*  const cardprod = await API.graphql({
+      query: queries.getCartPoductByUserSub,
+      variables: {userSub: authUser.attributes.sub},
+    }); */
+    const cardprod = await DataStore.query(CartPoduct, cp =>
+      cp.userSub('eq', authUser.attributes.sub),
+    );
+    console.log('creating cartProd response :', cardprod);
+    setCartProduct(cardprod);
   };
 
   useEffect(() => {
@@ -39,7 +48,7 @@ const ShoppingCart = () => {
   //i dont have a prodcut fild in the CartProduct
   //for each cartProdcut i must query the product with the productID and and assign it to a product field
 
-  console.log('finalcardproduct', cartProduct);
+  /*  console.log('finalcardproduct', cartProduct); */
 
   useEffect(() => {
     /* subscribe to shpping card update (ex quantity of product) */
@@ -83,7 +92,6 @@ const ShoppingCart = () => {
         </Text>
         <Button title="Proceed to checkout" onPress={onCheckout} />
       </View>
-
       {/* flatlist that render shoppingcart Prodcuts */}
       <FlatList
         data={cartProduct}

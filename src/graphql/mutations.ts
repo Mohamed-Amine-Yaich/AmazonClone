@@ -20,6 +20,9 @@ export const createProduct = /* GraphQL */ `
       avgRating
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -41,6 +44,9 @@ export const updateProduct = /* GraphQL */ `
       avgRating
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -62,6 +68,9 @@ export const deleteProduct = /* GraphQL */ `
       avgRating
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -89,9 +98,15 @@ export const createCartPoduct = /* GraphQL */ `
         avgRating
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -119,9 +134,15 @@ export const updateCartPoduct = /* GraphQL */ `
         avgRating
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -149,9 +170,264 @@ export const deleteCartPoduct = /* GraphQL */ `
         avgRating
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createOrderProduct = /* GraphQL */ `
+  mutation CreateOrderProduct(
+    $input: CreateOrderProductInput!
+    $condition: ModelOrderProductConditionInput
+  ) {
+    createOrderProduct(input: $input, condition: $condition) {
+      option
+      quantity
+      id
+      PoductID
+      poduct {
+        id
+        userSub
+        quantity
+        option
+        ProductID
+        product {
+          id
+          title
+          description
+          image
+          images
+          options
+          price
+          oldPrice
+          ratings
+          avgRating
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      OrderID
+      order {
+        id
+        userSub
+        country
+        fullName
+        phoneNumber
+        adress
+        city
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateOrderProduct = /* GraphQL */ `
+  mutation UpdateOrderProduct(
+    $input: UpdateOrderProductInput!
+    $condition: ModelOrderProductConditionInput
+  ) {
+    updateOrderProduct(input: $input, condition: $condition) {
+      option
+      quantity
+      id
+      PoductID
+      poduct {
+        id
+        userSub
+        quantity
+        option
+        ProductID
+        product {
+          id
+          title
+          description
+          image
+          images
+          options
+          price
+          oldPrice
+          ratings
+          avgRating
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      OrderID
+      order {
+        id
+        userSub
+        country
+        fullName
+        phoneNumber
+        adress
+        city
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteOrderProduct = /* GraphQL */ `
+  mutation DeleteOrderProduct(
+    $input: DeleteOrderProductInput!
+    $condition: ModelOrderProductConditionInput
+  ) {
+    deleteOrderProduct(input: $input, condition: $condition) {
+      option
+      quantity
+      id
+      PoductID
+      poduct {
+        id
+        userSub
+        quantity
+        option
+        ProductID
+        product {
+          id
+          title
+          description
+          image
+          images
+          options
+          price
+          oldPrice
+          ratings
+          avgRating
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      OrderID
+      order {
+        id
+        userSub
+        country
+        fullName
+        phoneNumber
+        adress
+        city
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createOrder = /* GraphQL */ `
+  mutation CreateOrder(
+    $input: CreateOrderInput!
+    $condition: ModelOrderConditionInput
+  ) {
+    createOrder(input: $input, condition: $condition) {
+      id
+      userSub
+      country
+      fullName
+      phoneNumber
+      adress
+      city
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateOrder = /* GraphQL */ `
+  mutation UpdateOrder(
+    $input: UpdateOrderInput!
+    $condition: ModelOrderConditionInput
+  ) {
+    updateOrder(input: $input, condition: $condition) {
+      id
+      userSub
+      country
+      fullName
+      phoneNumber
+      adress
+      city
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteOrder = /* GraphQL */ `
+  mutation DeleteOrder(
+    $input: DeleteOrderInput!
+    $condition: ModelOrderConditionInput
+  ) {
+    deleteOrder(input: $input, condition: $condition) {
+      id
+      userSub
+      country
+      fullName
+      phoneNumber
+      adress
+      city
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
